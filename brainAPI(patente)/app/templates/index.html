@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Análise de Tumores Cerebrais - Página Inicial</title>
+  <style>
+    .main {
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <form class="form-signin" method=post enctype=multipart/form-data>
+      <h2 class="text-white">Bem Vindo ao Analisador de Tumores Cerebrais</h2>
+      <span class="text-white">Clique no botão abaixo para enviar uma tomografia</span>
+      <div class="input">
+        <label for="file"><span class="material-symbols-outlined">upload</span></label>
+        <input id="file" name="file" type="file" class="form-control-file">
+      </div>
+      <div id="isLoaded"></div>
+      <button class="buttonSubmit" type="submit">Analisar</button>
+    </form>
+  </div>
+  <script src="//code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $('#file').bind('change', function () {
+      let fileSize = this.files[0].size / 1024 / 1024;
+      if (fileSize > 15) {
+        $("#file").val(null);
+        alert('Arquivo muito grande! Selecione um arquivo com menos de 15 MB')
+        return
+      } else {
+        $("#isLoaded").text("Imagem Carregada")
+      }
+    });
+  </script>
+</body>
+
+</html>

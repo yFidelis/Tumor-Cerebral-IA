@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Análise de Tumores Cerebrais - Resultado</title>
+
+<body>
+  <div class="page">
+    <div class="lateralDiv">
+      <a id="homePgBtn" class="btnLink" href="/">
+        <i class="fa fa-home" style="font-size:3rem; color:white;"></i>
+      </a>
+    </div>
+    <div class="main">
+      <h1 class="h3 mb-3 font-weight-normal text-white">PREVISÃO</h1>
+      <div class="d-flex flex-row justify-center align-items-center gap-3">
+        <div class="d-flex flex-column justify-center align-items-center">
+          <img src="{{ url_for('display_image', filename=filename) }}" class="imagemRaioX" id="imageSelected"
+            alt="Imagem Raio-X selecionada" />
+          <b class="text-center text-white">Original</b>
+        </div>
+        <div class="d-flex flex-column justify-center align-items-center">
+          <img src="{{ url_for('display_image', filename=heatmap_filename) }}" class="imagemRaioX"
+            id="heatmapImageSelected" alt="Imagem Raio-X selecionada" />
+          <b class="text-center text-white">Mapa de decisão</b>
+        </div>
+      </div>
+
+      <h5 class="h5 mb-3 font-weight-normal text-white">{{ result }}</h5>
+      <button type="button" class="buttonSubmit" data-toggle="modal" data-target="#explicacaoModal">
+        Sobre a classificação
+      </button>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="explicacaoModal" tabindex="-1" role="dialog" aria-labelledby="explicacaoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="explicacaoModalLabel">Explicação sobre a Classificação - Gerada por IA</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ explicacao }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal para a imagem original -->
+<div class="modal fade" id="originalImageModal" tabindex="-1" role="dialog" aria-labelledby="originalImageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <img src="{{ url_for('display_image', filename=filename) }}" class="img-fluid w-100 h-100" alt="Imagem Original">
+        <button type="button" class="btn btn-light position-absolute top-0 end-0 m-2" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para o mapa de decisão -->
+<div class="modal fade" id="heatmapImageModal" tabindex="-1" role="dialog" aria-labelledby="heatmapImageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <img src="{{ url_for('display_image', filename=heatmap_filename) }}" class="img-fluid w-100 h-75" alt="Mapa de Decisão">
+        <button type="button" class="btn btn-light position-absolute top-0 end-0 m-2" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+  <script>
+    document.getElementById('imageSelected').addEventListener('click', function () {
+      $('#originalImageModal').modal('show');
+    });
+    document.getElementById('heatmapImageSelected').addEventListener('click', function () {
+      $('#heatmapImageModal').modal('show');
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-image: url('background.jpg');
+  background-size: cover;
+
+  &:before {
+    content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000000;
+        opacity: .6; 
+        z-index: -1;
+  }
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  display: -ms-flexbox;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  width: 50%;
+  height: 100%;
+  padding: 5px;
+  display: -ms-flexbox;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagemRaioX {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+}
+
+.imagemRaioX:hover {
+  transform: scale(1.05);
+  transition: all .5s;
+  cursor: pointer;
+}
+
+.form-signin {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#alertSpan {
+  color: #ffffff;
+  font-style: italic;
+  font-size: 1.03em;
+}
+
+/* Esconde o input */
+input[type='file'] {
+  display: none
+}
+
+label {
+  background-color: #000000;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin: 10px;
+  display: block;
+  transition: .3s;
+}
+
+label:hover {
+  background-color: #dddddd;
+  transform: scale(1.05);
+  color: #000;
+}
+
+#isLoaded {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 10px;
+  color: white;
+}
+
+.buttonSubmit {
+  background-color: #000000;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.buttonSubmit:hover {
+  background-color: #272727;
+  transform: scale(1.05);
+}
+
+/* Resultado */
+#imageSelected {
+  margin: 10px
+}
+
+/* Icons */
+@media only screen and (max-width: 720px) {
+  .page {
+    flex-direction: column;
+  }
+}
